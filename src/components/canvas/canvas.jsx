@@ -4,6 +4,7 @@ import CanvasDraw from "react-canvas-draw";
 const socket = io("http://127.0.0.1:8080");
 
 const Canvas = props => {
+
   const [value, setValue] = useState({
     data: ""
   });
@@ -15,7 +16,14 @@ const Canvas = props => {
     socket.emit("chat", {
       value
     });
+
   }, [value]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const canvasData = canvas.getSaveData();
+    console.log("canvas data", canvasData);
+  }, [])
 
   const { data } = value;
 
@@ -25,8 +33,8 @@ const Canvas = props => {
 
   const handleSave = () => {
     const canvas = canvasRef.current;
-    const data = canvas.getSaveData();
-    socket.emit("graph", data);
+    const canvasData = canvas.getSaveData();
+    socket.emit("graph", canvasData);
   };
 
   const handleLoadData = () => {
@@ -55,7 +63,7 @@ const Canvas = props => {
         <button onClick={handleLoadData}>load</button>
         <CanvasDraw
           ref={canvasRef}
-          hideGrid={true}
+          hideGrid={false}
           canvasHeight={200}
           canvasHeight={200}
           brushRadius={1}
