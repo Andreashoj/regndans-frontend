@@ -6,28 +6,27 @@ const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: "red",
     position: "relative",
-    maxWidth: "200px",
     height: "auto",
+    transition: "transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms",
+    transform: "translateX(100px)"
   },
   slide: {
-    position: "absolute",
+    position: "relative",
     height: "100vh",
-    zIndex: theme.zIndex.drawer
+    zIndex: theme.zIndex.drawer,
+    transform: "none",
+  },
+  reset: {
+    transform: "translateX(0px)",
+    maxWidth: "0px",
   },
   contentWrapper: {
     wordBreak: "break-word",
     borderRight: "1px solid #EFF3F6",
-    display: "flex",
     flexDirection: "column",
     position: "relative",
-    width: "100%",
     height:"100%",
     backgroundColor: "#F8FAFB ",
-    "@global": {
-      "header, footer, section": {
-        padding: "5px 20px"
-      }
-    }
   },
   button:{
     backgroundColor: "#F8FAFB",
@@ -58,7 +57,7 @@ const Helper = (props) => {
   }
 
   return (
-    <div className={ classes.root}>
+    <div className={checked ? classes.root : classes.reset}>
       <Slide className={classes.slide} direction="right" in={checked} >
       <div>
           <div className={classes.contentWrapper}>
