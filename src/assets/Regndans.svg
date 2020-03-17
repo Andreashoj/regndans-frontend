@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="195" height="58" viewBox="0 0 195 58">
+  <defs>
+    <filter id="Regndans" x="0" y="0" width="195" height="58" filterUnits="userSpaceOnUse">
+      <feOffset dy="4" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feFlood flood-opacity="0.18"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Regndans)">
+    <text id="Regndans-2" data-name="Regndans" transform="translate(97.5 40.5)" fill="#fff" font-size="37" font-family="SegoeUI-Semibold, Segoe UI" font-weight="600" letter-spacing="0.08em"><tspan x="-92.734" y="0">Regndans</tspan></text>
+  </g>
+</svg>

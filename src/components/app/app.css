@@ -6,7 +6,10 @@
 h1,
 p,
 a {
-  font-family: "proxima-nova", sans-serif;
+  font-family: proxima-nova, sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  color: #3e4859;
 }
 
 a {

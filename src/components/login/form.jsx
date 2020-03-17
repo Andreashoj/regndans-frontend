@@ -1,39 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { login } from "../utils/auth/auth";
-import {
-  Box,
-  FormControl,
-  Button,
-  Switch,
-  makeStyles,
-  Link
-} from "@material-ui/core";
-import InputField from "./inputField";
+import { Box, FormControl, Fade } from "@material-ui/core";
 import logo from "../../assets/logo-title.svg";
+import FormSignIn from "./formSignIn";
+import FormSignUp from "./formSignUp";
+import { withRouter } from "react-router-dom";
+import { useTransition, animated } from "react-spring";
 
-const useStyles = makeStyles({
-  activeText: {
-    opacity: 1
-  },
-  inActiveText: {
-    opacity: 0.3
-  }
-});
+const handleUrl = url => {
+  return url.split("/").splice(-1, 1)[0];
+};
 
 const Form = props => {
-  const classes = useStyles();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [isRemember, setIsRemember] = useState(false);
   const [error, setError] = useState({
     isError: false,
     errorText: ""
   });
+  const [user, setUser] = useState({
+    username: "",
+    password: ""
+  });
+  const [loginPage, setLoginPage] = useState(true);
+  const transitions = useTransition(loginPage, null, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 }
+  });
+
+  const [url, setUrl] = useState(() => handleUrl(props.location.pathname));
+
+  useEffect(() => {
+    const url = handleUrl(props.location.pathname);
+    setUrl(() => handleUrl(props.location.pathname));
+    if (url === "formsignup") {
+      setLoginPage(false);
+    }
+  }, [props.history.location]);
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    const userError = login(username, password, () => {
+    const userError = login(user.username, user.password, () => {
       props.history.push("/");
     });
 
@@ -45,68 +52,44 @@ const Form = props => {
     }
   };
 
-  const handleChange = event => {
-    setIsRemember(!isRemember);
+  const handleUser = (username, password) => {
+    setUser({
+      username,
+      password
+    });
   };
 
   return (
-    <Box width="50%" display="flex" alignItems="center" justifyContent="center">
-      <form onSubmit={e => handleSubmit(e)} style={{ width: "60%" }}>
+    <Box
+      width="50%"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      style={{ boxShadow: "0 3px 15px rgb(36, 51, 65)" }}
+    >
+      <form
+        onSubmit={e => handleSubmit(e)}
+        style={{ width: "60%", maxWidth: "600px" }}
+      >
         <FormControl fullWidth={true} style={{ alignItems: "flex-start" }}>
           <Box display="flex" width="100%" justifyContent="center">
             <img src={logo} alt="Regndans logo" />
           </Box>
-          <h1 className="form-title">Sign In</h1>
-          <InputField
-            handleState={setUsername}
-            error={error}
-            value={username}
-            label="Brugernavn"
-            type="text"
-          />
-          <InputField
-            handleState={setPassword}
-            error={error}
-            value={password}
-            label="Password"
-            type="password"
-          />
-          <Box display="flex" height="40px" display="flex" alignItems="center">
-            <p
-              className={isRemember ? classes.activeText : classes.inActiveText}
-              style={{ transition: "all 0.2s ease" }}
-            >
-              Keep me logged in?
-            </p>
-            <Switch
-              checked={isRemember}
-              onChange={handleChange}
-              value="checkedB"
-              color="secondary"
-              inputProps={{ "aria-label": "primary checkbox" }}
-            />
-          </Box>
-          <Box marginTop="15px" display="flex" justifyContent="flex-end">
-            <Button
-              type="submit"
-              variant="contained"
-              color="secondary"
-              size="large"
-              padding="dense"
-              style={{ color: "white", height: "48px", padding: "0 40px" }}
-            >
-              Login
-            </Button>
-          </Box>
-          <Box>
-            <Link style={{ cursor: "pointer" }} to="#">
-              Forgot your password?
-            </Link>
-          </Box>
+          {transitions.map(({ props }) =>
+            loginPage ? (
+              <animated.div style={props}>
+                <FormSignIn handleUser={handleUser} error={error} />
+              </animated.div>
+            ) : (
+              <animated.div style={props}>
+                <FormSignUp error={error} />
+              </animated.div>
+            )
+          )}
         </FormControl>
       </form>
     </Box>
   );
 };
 
-export default Form;
+export default withRouter(Form);

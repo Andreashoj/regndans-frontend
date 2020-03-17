@@ -14,6 +14,7 @@ const InputField = props => {
       error={error.isError}
       helperText={error.errorText}
       color="secondary"
+      style={{ margin: "16px 0" }}
     />
   );
 };
