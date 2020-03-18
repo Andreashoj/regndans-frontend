@@ -19,7 +19,7 @@ function App() {
     <div className={classes.App}>
       <Router>
         <Switch>
-            <Helper message="lorem ipsum message text" subMessage="Sub Lorem ipsum message text" title="Overskrift" subTitle="sub overskrift" image="https://via.placeholder.com/150"/>
+            <Helper section="lorem ipsum message text" message="test" subMessage="Sub Lorem ipsum message text" title="Overskrift" subTitle="sub overskrift" image="https://via.placeholder.com/150"/>
         </Switch>
         <Switch>
           <Appbar />
