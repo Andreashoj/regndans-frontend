@@ -21,6 +21,7 @@ const Form = props => {
     password: ""
   });
   const [loginPage, setLoginPage] = useState(true);
+  
   const transitions = useTransition(loginPage, null, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
@@ -34,6 +35,8 @@ const Form = props => {
     setUrl(() => handleUrl(props.location.pathname));
     if (url === "formsignup") {
       setLoginPage(false);
+    }else{
+      setLoginPage(true);
     }
   }, [props.history.location]);
 
@@ -75,12 +78,12 @@ const Form = props => {
           <Box display="flex" width="100%" justifyContent="center">
             <img src={logo} alt="Regndans logo" />
           </Box>
-          {transitions.map(({ props }) =>
-            loginPage ? (
-              <animated.div style={props}>
+          {transitions.map(({item, props, key}) =>
+             loginPage ? item && (
+              <animated.div  style={props}>
                 <FormSignIn handleUser={handleUser} error={error} />
               </animated.div>
-            ) : (
+            ) : !item && (
               <animated.div style={props}>
                 <FormSignUp error={error} />
               </animated.div>
