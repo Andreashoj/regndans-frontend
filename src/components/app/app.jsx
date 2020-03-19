@@ -4,24 +4,29 @@ import Helper from "../helper";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "../login";
 import FormSignUp from "../login/formSignUp";
+import {makeStyles, Grid} from "@material-ui/core";
+import Appbar from "../appBar";
+import { ThemeProvider } from '@material-ui/core/styles';
+const useStyles = makeStyles({
+  App:{
+  }
+}); 
+
 
 function App() {
+  const classes = useStyles();
   return (
-    <div className="App">
+    <>
+    <div className={classes.App}>
       <Router>
         <Switch>
           <Route exact path="/login/signup" component={FormSignUp} />
           <Route path="/login" component={Login} />
-          <Helper
-            message="lorem ipsum message text"
-            subMessage="Sub Lorem ipsum message text"
-            title="Overskrift"
-            subTitle="sub overskrift"
-            image="https://via.placeholder.com/150"
-          />
+          <Route path="/home" component={Helper} />
         </Switch>
       </Router>
     </div>
+    </>
   );
 }
 
