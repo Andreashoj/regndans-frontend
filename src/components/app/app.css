@@ -16,3 +16,18 @@ a {
   list-style-type: none;
   text-decoration: none;
 }
+
+input[type="submit"]{
+  background-color: #1ABC9C;
+  color: #FFF;
+  width: 50%;
+}
+
+input[type="text"]{
+  background: #FCFCFC;
+  padding: 8px 16px;
+  border: 1px solid #E0E4EA;
+}
+
+
+
