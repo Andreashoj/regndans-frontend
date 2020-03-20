@@ -4,12 +4,12 @@ import {Box, Grid} from "@material-ui/core";
 import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
 import Canvas from "../canvas";
 import Appbar from "../appBar";
+import Team from "../team";
 const useStyles = makeStyles(theme => ({
   container:{
     display:"flex",
   },
   root: {
-    backgroundColor: "red",
     position: "relative",
     height: "100vh",
   },
@@ -43,6 +43,7 @@ const useStyles = makeStyles(theme => ({
     boxShadow: "0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)"
   },
   SlideBar: {
+    marginLeft: "90px",
     borderBox: "box-sizing",
     borderRight: "1px solid #E0E4EA",
     position: "relative",
@@ -76,7 +77,7 @@ const SlideBar = (props) => {
 
   const slideEl = useRef(null);
   const classes = useStyles();
-  const [state, setState] = useState(true);
+  const [state, setState] = useState(false);
 
   //Functions 
   const onHandleClick = () => {
@@ -133,11 +134,12 @@ const Helper = (props) => {
 
   const handleChange = () => {
     setChecked(prev => !prev);
-  }
+  };
 
   return (
       <>
       <div className={classes.container}>
+        <Team />
         <SlideBar section="DEFINING PERSON & PROBLEM" message={props.message} subMessage={props.subMessage}>
           <div className={classes.contentWrapper}>
             <header>
@@ -165,7 +167,7 @@ const Helper = (props) => {
         </SlideBar>
         <Grid container>
           <Grid item xs={12}>
-          <Appbar />
+          <Appbar color="primary" position="static"/>
           </Grid>
           <Grid item xs={12}>
             <Box className={classes.main}>
