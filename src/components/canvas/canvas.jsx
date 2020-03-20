@@ -7,18 +7,21 @@ import {Button, Grid, Input } from "@material-ui/core";
 import PropTypes from "prop-types";
 import Form from "../form";
 
+const jsonObject = [{key: 1, htmlFor: "something", value: "Label 1"},{key: 2, htmlFor: "something", value: "Label 1"},{key: 23, htmlFor: "something", value: "Label 1"}];
+
 const socket = io("http://127.0.0.1:8080");
 
 const useStyles = makeStyles(theme => ({
   root: {
 
   },
-  main:{
-
+  canvas:{
+      backgroundColor: "white",
+      border: "1px solid #ebebeb",
+      borderRadius: "8px",
+      marginTop: "20px",
+      width: "100% !important"
   },
-  label: {
-    border: "1px solid #ebebeb"
-  }
 }));
 
 
@@ -68,7 +71,7 @@ const Canvas = (props) => {
   };
 
   return (
-    <Grid container>
+    <Grid container spacing={8}>
       <Grid item xs={8}>
         <h1>{props.title}</h1>
         <span style={{display: "flex"}}>
@@ -76,36 +79,20 @@ const Canvas = (props) => {
           <EditIcon style={{paddingLeft: "10px"}}/>
         </span>
         <CanvasDraw
+            className={classes.canvas}
           ref={canvasRef}
           brushRadius={1}
           lazyRadius={1}
-          style={{
-            backgroundColor: "white",
-            border: "1px solid #ebebeb",
-            marginTop: "20px",
-          }}
+
         />
         <Button color="error" onClick={clearData}>
             Clear Canvas
         </Button>
       </Grid>
-      <Grid item xs={4}>
-        {
-          /* TODO:
-            1. * [X] Split form component up so it's a component
-            2. * [] Validate the props for it
-          */
-        }
-        <Form labels={[{key: 1, htmlFor: "something", value: "Label 1"},{key: 2, htmlFor: "something", value: "Label 1"},{key: 23, htmlFor: "something", value: "Label 1"}]}/>
+      <Grid  item xs={4}>
+        <Form labels={jsonObject}/>
       </Grid>
     </Grid>
   );
 };
-
 export default Canvas;
-
-
-Canvas.propTypes = {
-  labelName: PropTypes.string.isRequired,
-
-};
