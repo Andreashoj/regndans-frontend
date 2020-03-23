@@ -41,6 +41,6 @@ Form.propTypes = {
         htmlFor: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired
     })
-}
+};
 
 export default Form;
