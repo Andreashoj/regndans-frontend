@@ -57,7 +57,7 @@ const FormSignIn = ({ handleUser, error }) => {
           inputProps={{ "aria-label": "primary checkbox" }}
         />
       </Box>
-      <Box marginTop="15px" display="flex" justifyContent="flex-end">
+      <Box marginTop="15px" display="flex" justifyContent="flex-start">
         <Button
           type="submit"
           variant="contained"

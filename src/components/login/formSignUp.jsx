@@ -40,8 +40,7 @@ const FormSignUp = ({ error }) => {
         label="Email"
         type="email"
       />
-      <Box display="flex" height="40px" alignItems="center"></Box>
-      <Box marginTop="15px" display="flex" justifyContent="flex-end">
+      <Box marginTop="15px" display="flex" justifyContent="flex-start">
         <Button
           type="submit"
           variant="contained"
