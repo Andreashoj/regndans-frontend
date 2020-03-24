@@ -81,17 +81,35 @@ const useStyles = makeStyles(theme => ({
   inactiveBar: {
     opacity: "0",
     visibility: "hidden"
+  },
+  phases: {
+    opacity: "0.5",
+    flex: "1",
+    height: "11px"
+  },
+  phaseWrapper: {
+    '@global': {
+      'div:first-of-type': {
+        borderRadius: "20px 0px 0px 20px"
+      },
+      'div:last-of-type': {
+        borderRadius: "0px 20px 20px 0px"
+      }
+    },
+    display: "flex",
   }
 }));
 
 const SlideBar = props => {
-  const { phase } = useContext(BoardContext);
+  const { phases } = useContext(BoardContext);
   const [sidebarClass, setSidebarClass] = useState("inactiveBar");
   const slideEl = useRef(null);
   const classes = useStyles();
   const [state, setState] = useState(false);
-  const [phases, setPhase] = useState(phase);
+  const [allPhases, setPhase] = useState(phases);
   const [open, setOpen] = useState(false);
+
+
 
   const handleOpen = () => {
     setOpen(prevState => !prevState);
@@ -116,7 +134,6 @@ const SlideBar = props => {
       : (slideEl.current.style.width = "0px") &&
         (slideEl.current.style.borderRight = "none");
   }, [state]);
-
   return (
     <div className={classes.SlideBar} ref={slideEl}>
       <button onClick={onHandleClick} className={classes.button}>
@@ -208,11 +225,10 @@ const SlideBar = props => {
                 Your browser does not support the video tag.
               </video>
             </section>
-            <Box>
-              {phases &&
-                phases.map((item, index) => (
-                  <Box key={index} color={item.section.color}>
-                    test
+            <Box className={classes.phaseWrapper}>
+              {allPhases &&
+              allPhases.map((phase, index) => (
+                  <Box className={classes.phases} key={index} style={phase.active ? {opacity: 1, backgroundColor: phase.color} : {backgroundColor: phase.color }}>
                   </Box>
                 ))}
             </Box>

@@ -5,8 +5,7 @@ export const BoardContext = createContext();
 const BoardContextProvider = props => {
 
     const [phases, setPhase] = useState([
-        {
-        section: {
+{
             phase: "problem",
             part: [
                 {
@@ -19,9 +18,8 @@ const BoardContextProvider = props => {
                 }
             ],
             color: "red",
-            active: true
-        }},
-        {section: {
+            active: false
+        },{
                 part: [
                     {
                         part: 1,
@@ -33,10 +31,9 @@ const BoardContextProvider = props => {
                     }
                 ],
                 phase: "idea",
-                color: "red",
-                active: false
-            }},
-        {section: {
+                color: "yellow",
+                active: true
+            }, {
                 part: [
                     {
                         part: 1,
@@ -50,8 +47,7 @@ const BoardContextProvider = props => {
                 phase: "something",
                 color: "green",
                 active: false
-            }},
-        {section: {
+            }, {
                 part: [
                     {
                         part: 1,
@@ -65,7 +61,7 @@ const BoardContextProvider = props => {
                 phase: "test",
                 color: "blue",
                 active: false
-            }}
+            }
         ]);
 
     return (

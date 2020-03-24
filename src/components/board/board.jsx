@@ -4,11 +4,12 @@ import {BoardContext} from "../../context/boardContext";
 
 const Board = (props) => {
     const {phases} = useContext(BoardContext);
+
     return (
             <>
             {
                 phases.map((phase, index) => (
-                    phase.section.active && <BoardSection key={index} phase={phase.section.phase} part={phase.section.part}/>
+                    phase.active && <BoardSection key={index} phase={phase.phase} part={phase.part}/>
                 ))
             }
         </>
