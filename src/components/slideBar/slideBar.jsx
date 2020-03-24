@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import ArrowForwardIosOutlinedIcon from "@material-ui/icons/ArrowForwardIosOutlined";
-import { Box, makeStyles, Typography } from "@material-ui/core";
+import {Modal, Paper, Box, makeStyles, Typography } from "@material-ui/core";
 import { BoardContext } from "../../context/boardContext";
 
 const useStyles = makeStyles(theme => ({
@@ -63,7 +63,10 @@ const useStyles = makeStyles(theme => ({
     display: "none"
   },
   video: {
-    maxWidth: "100%"
+    maxWidth: "100%",
+    width: "100%",
+    height: "200px",
+    backgroundColor: "Red"
   },
   spanLine: {
     width: "100%",
@@ -88,6 +91,11 @@ const SlideBar = props => {
   const classes = useStyles();
   const [state, setState] = useState(false);
   const [phases, setPhase] = useState(phase);
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(prevState => !prevState);
+  };
   //Functions
   const onHandleClick = () => {
     setState(prev => !prev);
@@ -195,7 +203,7 @@ const SlideBar = props => {
               >
                 Video tutorial
               </Typography>
-              <video className={classes.video} height="auto" controls>
+              <video  onClick={handleOpen} className={classes.video}>
                 <source src="" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
@@ -211,6 +219,20 @@ const SlideBar = props => {
           </Box>
         </Box>
       </div>
+      <Modal
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+          open={open}
+          onClose={handleOpen}
+          style={{display: "flex", flex: "1", alignItems: "center", justifyContent: "center"}}
+      >
+        <Paper style={{width: "50vw", height: "500px" }}>
+          <video  className={classes.video}>
+            <source src="" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </Paper>
+      </Modal>
     </div>
   );
 };

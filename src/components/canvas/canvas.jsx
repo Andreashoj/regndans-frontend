@@ -22,7 +22,6 @@ const socket = io("http://127.0.0.1:8080");
 const useStyles = makeStyles(theme => ({
     root: {},
     canvas: {
-        paddingLeft: "10vw",
         backgroundColor: "white",
         border: "1px solid #ebebeb",
         borderRadius: "8px",
