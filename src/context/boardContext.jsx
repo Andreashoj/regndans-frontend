@@ -17,8 +17,8 @@ const BoardContextProvider = props => {
                     active: false
                 }
             ],
-            color: "red",
-            active: false
+            color: "#E74C3C",
+            active: true
         },{
                 part: [
                     {
@@ -31,8 +31,8 @@ const BoardContextProvider = props => {
                     }
                 ],
                 phase: "idea",
-                color: "yellow",
-                active: true
+                color: "#F1C40F",
+                active: false
             }, {
                 part: [
                     {
@@ -45,7 +45,7 @@ const BoardContextProvider = props => {
                     }
                 ],
                 phase: "something",
-                color: "green",
+                color: "#2ECC71",
                 active: false
             }, {
                 part: [
@@ -59,7 +59,7 @@ const BoardContextProvider = props => {
                     }
                 ],
                 phase: "test",
-                color: "blue",
+                color: "#3498DB",
                 active: false
             }
         ]);

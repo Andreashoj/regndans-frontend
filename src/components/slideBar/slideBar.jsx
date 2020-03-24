@@ -85,7 +85,8 @@ const useStyles = makeStyles(theme => ({
   phases: {
     opacity: "0.5",
     flex: "1",
-    height: "11px"
+    height: "11px",
+    position: "relative"
   },
   phaseWrapper: {
     '@global': {
@@ -134,6 +135,16 @@ const SlideBar = props => {
       : (slideEl.current.style.width = "0px") &&
         (slideEl.current.style.borderRight = "none");
   }, [state]);
+
+  const convertHex = (hex,opacity) =>{
+    hex = hex.replace('#','');
+    const r = parseInt(hex.substring(0,2), 16);
+    const g = parseInt(hex.substring(2,4), 16);
+    const b = parseInt(hex.substring(4,6), 16);
+    const result = 'rgba('+r+','+g+','+b+','+opacity/100+')';
+    return result;
+  };
+
   return (
     <div className={classes.SlideBar} ref={slideEl}>
       <button onClick={onHandleClick} className={classes.button}>
@@ -226,9 +237,12 @@ const SlideBar = props => {
               </video>
             </section>
             <Box className={classes.phaseWrapper}>
+
               {allPhases &&
               allPhases.map((phase, index) => (
-                  <Box className={classes.phases} key={index} style={phase.active ? {opacity: 1, backgroundColor: phase.color} : {backgroundColor: phase.color }}>
+                  <Box mt={4} className={classes.phases} key={index} style={phase.active ? {opacity: 1, backgroundColor: phase.color, boxShadow:`0 0 8px ${convertHex(phase.color, 100)}`} : {backgroundColor: phase.color }}>
+                    {phase.active &&
+                    <p style={{position: "absolute", top: "-18px", fontSize: "12px", fontWeight: "300"}}>Current phase</p>}
                   </Box>
                 ))}
             </Box>
@@ -243,7 +257,7 @@ const SlideBar = props => {
           style={{display: "flex", flex: "1", alignItems: "center", justifyContent: "center"}}
       >
         <Paper style={{width: "50vw", height: "500px" }}>
-          <video  className={classes.video}>
+          <video style={{height: "100%"}} className={classes.video}>
             <source src="" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
