@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
     borderBox: "box-sizing",
     position: "relative",
     height: "100vh",
-    maxWidth: "340px",
+    maxWidth: "440px",
     backgroundColor: "#F8FAFB",
     display: "flex",
     flexDirection: "column",
@@ -103,7 +103,7 @@ const SlideBar = props => {
     }
 
     state
-      ? (slideEl.current.style.width = "340px") &&
+      ? (slideEl.current.style.width = "440px") &&
         (slideEl.current.style.borderRight = "1px solid #E0E4EA")
       : (slideEl.current.style.width = "0px") &&
         (slideEl.current.style.borderRight = "none");

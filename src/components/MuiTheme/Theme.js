@@ -1,6 +1,21 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
+  props:{
+    MuiCssBaseline: {
+      '@global': {
+        'h1': "20px"
+      },
+    },
+    MuiTypography: {
+      variantMapping: {
+        h1: "h1",
+      },
+    },
+    MuiButtonBase: {
+      disableRipple: false
+    }
+  },
   palette: {
     primary: {
       main: "#34495E"

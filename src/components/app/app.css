@@ -4,9 +4,12 @@
 }
 
 h1,
+h2,
+h3,
+h4,
 p,
 a {
-  font-family: proxima-nova, sans-serif;
+  font-family: proxima-nova, sans-serif !important;
   font-weight: 600;
   font-style: normal;
   color: #3e4859;

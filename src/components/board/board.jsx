@@ -3,13 +3,14 @@ import BoardSection from "../section";
 import {BoardContext} from "../../context/boardContext";
 
 const Board = (props) => {
-    const {phase} = useContext(BoardContext);
+    const {phases} = useContext(BoardContext);
     return (
-        <>
-        {phase.name === 1 ? <h1>section 1</h1>
-            : phase.name === 2 ? <h1>section 2</h1>
-            : phase.name === 3 ? <h1> section 3</h1>
-            : <BoardSection/>}
+            <>
+            {
+                phases.map((phase, index) => (
+                    phase.section.active && <BoardSection key={index} phase={phase.section.phase} part={phase.section.part}/>
+                ))
+            }
         </>
     )
 };
