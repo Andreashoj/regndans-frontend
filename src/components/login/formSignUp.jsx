@@ -7,7 +7,7 @@ const FormSignUp = ({handleUser, error}) => {
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    const [repeatPassword, setRepeatPassword] = useState("");
 
 
 
@@ -18,7 +18,7 @@ const FormSignUp = ({handleUser, error}) => {
             </h1>
             <InputField
                 handleState={setEmail}
-                error={error.email} // CHANGE TO BOOLEAN STATE INSTEAD OF STRING
+                error={!!error.email} // CHANGE TO BOOLEAN STATE INSTEAD OF STRING
                 helperText={error.email}
                 value={email}
                 label="Email"
@@ -26,7 +26,7 @@ const FormSignUp = ({handleUser, error}) => {
             />
             <InputField
                 handleState={setUsername}
-                error={error.username} // CHANGE TO BOOLEAN STATE INSTEAD OF STRING
+                error={!!error.username} // CHANGE TO BOOLEAN STATE INSTEAD OF STRING
                 helperText={error.username}
                 value={username}
                 label="Brugernavn"
@@ -34,16 +34,17 @@ const FormSignUp = ({handleUser, error}) => {
             />
             <InputField
                 handleState={setPassword}
-                error={error.password} // CHANGE TO BOOLEAN STATE INSTEAD OF STRING
+                error={!!error.password} // CHANGE TO BOOLEAN STATE INSTEAD OF STRING
                 helperText={error.password}
                 value={password}
                 label="Password"
                 type="password"
             />
             <InputField
-                handleState={setConfirmPassword}
-                error={true} // CHANGE TO BOOLEAN STATE INSTEAD OF STRING
-                value={confirmPassword}
+                handleState={setRepeatPassword}
+                error={!!error.repeat_password} // CHANGE TO BOOLEAN STATE INSTEAD OF STRING
+                helperText={error.repeat_password}
+                value={repeatPassword}
                 label="Confirm password"
                 type="password"
             />
@@ -56,7 +57,7 @@ const FormSignUp = ({handleUser, error}) => {
                     size="large"
                     padding="dense"
                     style={{color: "white", height: "48px", padding: "0 40px"}}
-                    onClick={() => handleUser(email, username, password)}
+                    onClick={() => handleUser(email, username, password, repeatPassword)}
                 >
                     Sign up
                 </Button>

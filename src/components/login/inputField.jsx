@@ -12,9 +12,9 @@ const InputField = props => {
       id="outlined-basic"
       margin={"dense"}
       onChange={e => handleState(e.target.value)}
-      // error={props.error}
+      error={props.error}
       helperText={props.helperText}
-      color="secondary"
+      color="primary"
       style={{ margin: "16px 0" }}
     />
   );

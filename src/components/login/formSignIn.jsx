@@ -31,14 +31,16 @@ const FormSignIn = ({ handleUser, error }) => {
       </h1>
       <InputField
         handleState={setUsername}
-        error={true}
+        error={!!error.username}
+        helperText={error.username}
         value={username}
         label="Brugernavn"
         type="text"
       />
       <InputField
         handleState={setPassword}
-        error={true}
+        error={!!error.password}
+        helperText={error.password}
         value={password}
         label="Password"
         type="password"

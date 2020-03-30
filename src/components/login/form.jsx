@@ -21,7 +21,8 @@ const Form = props => {
     const [user, setUser] = useState({
         email: "",
         username: "",
-        password: ""
+        password: "",
+        repeat_password: ""
     });
 
     const [loginPage, setLoginPage] = useState(true);
@@ -50,9 +51,10 @@ const Form = props => {
     const validate = () => {
         //Create Joi Schema
         const schema = Joi.object({
-            email: Joi.string().required().label('Email'),
-            username: Joi.string().required().label('Username'),
-            password: Joi.string().required().label('Password')
+            email: Joi.string().email({minDomainSegments: 2, tlds: {allow: false}}).required().label('Email'),
+            username: Joi.string().required().label('Username').min(5),
+            password: Joi.string().required().label('Password'),
+            repeat_password: Joi.ref('password')
         });
         //Validate Schema
         const result = schema.validate(user, {abortEarly: false});
@@ -64,7 +66,6 @@ const Form = props => {
         for (let item of result.error.details) {
             errors[item.path[0]] = item.message;
         }
-
         return errors;
     }
 
@@ -75,7 +76,7 @@ const Form = props => {
         const errors = validate();
         setError(errors || {});
         //if any errors stop return function here.
-        if(errors) return;
+        if (errors) return;
 
 
         //check which if we are on login or signup or forgot password
@@ -86,8 +87,8 @@ const Form = props => {
                 if (error.response && error.response.status === 400)
                     console.log(error.response)
             }
-
-        };
+        }
+        ;
 
         // console.log('hello world')
         //
@@ -111,11 +112,12 @@ const Form = props => {
         // }
     };
 
-    const handleUser = (email, username, password) => {
+    const handleUser = (email, username, password, repeatPassword) => {
         setUser({
             email: email,
             username: username,
-            password: password
+            password: password,
+            repeat_password: repeatPassword
         });
     };
 
