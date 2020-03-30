@@ -5,11 +5,11 @@ import InputField from "./inputField";
 
 const useStyles = makeStyles({
   activeText: {
-    opacity: 1
+    opacity: 1,
   },
   inActiveText: {
-    opacity: 0.3
-  }
+    opacity: 0.3,
+  },
 });
 
 const FormSignIn = ({ handleUser, error }) => {
@@ -18,11 +18,11 @@ const FormSignIn = ({ handleUser, error }) => {
   const [password, setPassword] = useState("");
   const [isRemember, setIsRemember] = useState(false);
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setIsRemember(!isRemember);
   };
 
-  console.log(error)
+  console.log(error);
 
   return (
     <>

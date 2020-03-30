@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import ArrowForwardIosOutlinedIcon from "@material-ui/icons/ArrowForwardIosOutlined";
-import {Modal, Paper, Box, makeStyles, Typography } from "@material-ui/core";
+import { Modal, Paper, Box, makeStyles, Typography } from "@material-ui/core";
 import { BoardContext } from "../../context/boardContext";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     position: "relative",
-    height: "100vh"
+    height: "100vh",
   },
   button: {
     transition: theme.transitions.create(["transform"], {
-      duration: theme.transitions.duration.standard
+      duration: theme.transitions.duration.standard,
     }),
     fontSize: "20px",
     position: "absolute",
@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     textAlign: "right",
     visibility: "visible",
     boxShadow:
-      "0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)"
+      "0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)",
   },
   SlideBar: {
     marginLeft: "90px",
@@ -42,8 +42,8 @@ const useStyles = makeStyles(theme => ({
     color: "black",
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    })
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   contentWrapper: {
     wordBreak: "break-word",
@@ -51,57 +51,57 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     position: "relative",
     display: "flex",
-    flex: "1"
+    flex: "1",
   },
   icon: {
     padding: "5px",
     display: "flex",
     alignItems: "center",
-    transform: "rotate(-180deg)"
+    transform: "rotate(-180deg)",
   },
   hide: {
-    display: "none"
+    display: "none",
   },
   video: {
     maxWidth: "100%",
     width: "100%",
     height: "200px",
-    backgroundColor: "Red"
+    backgroundColor: "Red",
   },
   spanLine: {
     width: "100%",
     height: "2px",
     backgroundColor: "#ECF0F1",
     borderRadius: "10px",
-    margin: "10px 0"
+    margin: "10px 0",
   },
   activeBar: {
-    opacity: "1"
+    opacity: "1",
   },
   inactiveBar: {
     opacity: "0",
-    visibility: "hidden"
+    visibility: "hidden",
   },
   phases: {
     opacity: "0.5",
     flex: "1",
     height: "11px",
-    position: "relative"
+    position: "relative",
   },
   phaseWrapper: {
-    '@global': {
-      'div:first-of-type': {
-        borderRadius: "20px 0px 0px 20px"
+    "@global": {
+      "div:first-of-type": {
+        borderRadius: "20px 0px 0px 20px",
       },
-      'div:last-of-type': {
-        borderRadius: "0px 20px 20px 0px"
-      }
+      "div:last-of-type": {
+        borderRadius: "0px 20px 20px 0px",
+      },
     },
     display: "flex",
-  }
+  },
 }));
 
-const SlideBar = props => {
+const SlideBar = (props) => {
   const { phases } = useContext(BoardContext);
   const [sidebarClass, setSidebarClass] = useState("inactiveBar");
   const slideEl = useRef(null);
@@ -110,14 +110,12 @@ const SlideBar = props => {
   const [allPhases, setPhase] = useState(phases);
   const [open, setOpen] = useState(false);
 
-
-
   const handleOpen = () => {
-    setOpen(prevState => !prevState);
+    setOpen((prevState) => !prevState);
   };
   //Functions
   const onHandleClick = () => {
-    setState(prev => !prev);
+    setState((prev) => !prev);
   };
   //Lifecycles
   useEffect(() => {
@@ -136,21 +134,29 @@ const SlideBar = props => {
         (slideEl.current.style.borderRight = "none");
   }, [state]);
 
-  const convertHex = (hex,opacity) =>{
-    hex = hex.replace('#','');
-    const r = parseInt(hex.substring(0,2), 16);
-    const g = parseInt(hex.substring(2,4), 16);
-    const b = parseInt(hex.substring(4,6), 16);
-    const result = 'rgba('+r+','+g+','+b+','+opacity/100+')';
+  const convertHex = (hex, opacity) => {
+    hex = hex.replace("#", "");
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    const result = "rgba(" + r + "," + g + "," + b + "," + opacity / 100 + ")";
     return result;
   };
 
   return (
     <div className={classes.SlideBar} ref={slideEl}>
-      <button onClick={onHandleClick} className={classes.button}>
+      <button
+        onClick={onHandleClick}
+        className={classes.button}
+        style={{ zIndex: "16" }}
+      >
         <ArrowForwardIosOutlinedIcon
           className={state && classes.icon}
-          style={{ fontSize: "small", paddingRight: "5px", color: "#E0E4EA" }}
+          style={{
+            fontSize: "small",
+            paddingRight: "5px",
+            color: "#E0E4EA",
+          }}
         />
       </button>
       <div
@@ -159,7 +165,7 @@ const SlideBar = props => {
           overflow: "hidden",
           position: "relative",
           zIndex: "100",
-          backgroundColor: "#F8FAFB"
+          backgroundColor: "#F8FAFB",
         }}
       >
         <Box
@@ -188,7 +194,7 @@ const SlideBar = props => {
                   fontSize: "12px",
                   display: "flex",
                   justifyContent: "center",
-                  alignItems: "center"
+                  alignItems: "center",
                 }}
               >
                 1/2
@@ -231,18 +237,43 @@ const SlideBar = props => {
               >
                 Video tutorial
               </Typography>
-              <video  onClick={handleOpen} className={classes.video}>
+              <video onClick={handleOpen} className={classes.video}>
                 <source src="" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </section>
             <Box className={classes.phaseWrapper}>
-
               {allPhases &&
-              allPhases.map((phase, index) => (
-                  <Box mt={4} className={classes.phases} key={index} style={phase.active ? {opacity: 1, backgroundColor: phase.color, boxShadow:`0 0 8px ${convertHex(phase.color, 100)}`} : {backgroundColor: phase.color }}>
-                    {phase.active &&
-                    <p style={{position: "absolute", top: "-18px", fontSize: "12px", fontWeight: "300"}}>Current phase</p>}
+                allPhases.map((phase, index) => (
+                  <Box
+                    mt={4}
+                    className={classes.phases}
+                    key={index}
+                    style={
+                      phase.active
+                        ? {
+                            opacity: 1,
+                            backgroundColor: phase.color,
+                            boxShadow: `0 0 8px ${convertHex(
+                              phase.color,
+                              100
+                            )}`,
+                          }
+                        : { backgroundColor: phase.color }
+                    }
+                  >
+                    {phase.active && (
+                      <p
+                        style={{
+                          position: "absolute",
+                          top: "-18px",
+                          fontSize: "12px",
+                          fontWeight: "300",
+                        }}
+                      >
+                        Current phase
+                      </p>
+                    )}
                   </Box>
                 ))}
             </Box>
@@ -250,14 +281,19 @@ const SlideBar = props => {
         </Box>
       </div>
       <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          open={open}
-          onClose={handleOpen}
-          style={{display: "flex", flex: "1", alignItems: "center", justifyContent: "center"}}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+        open={open}
+        onClose={handleOpen}
+        style={{
+          display: "flex",
+          flex: "1",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       >
-        <Paper style={{width: "50vw", height: "500px" }}>
-          <video style={{height: "100%"}} className={classes.video}>
+        <Paper style={{ width: "50vw", height: "500px" }}>
+          <video style={{ height: "100%" }} className={classes.video}>
             <source src="" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
