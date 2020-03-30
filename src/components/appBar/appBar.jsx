@@ -1,25 +1,28 @@
-import React, { useRef } from "react";
-import { AppBar, Grid, makeStyles, Box } from "@material-ui/core";
-import PropTypes from "prop-types";
-import logo from "../../assets/logo-title.svg";
-const useStyles = makeStyles(theme => ({
+import React, { useRef } from 'react';
+import {
+  AppBar, Grid, makeStyles, Box,
+} from '@material-ui/core';
+import PropTypes from 'prop-types';
+import logo from '../../assets/logo-title.svg';
+
+const useStyles = makeStyles((theme) => ({
   root: {
-    alignSelf: "baseline",
-    padding: "8px",
-    backgroundColor: "white",
-    borderBottom: "1px solid #ECF0F1",
-    width: "auto",
-    flex: "1",
-    boxShadow: "none"
+    alignSelf: 'baseline',
+    padding: '8px',
+    backgroundColor: 'white',
+    borderBottom: '1px solid #ECF0F1',
+    width: 'auto',
+    flex: '1',
+    boxShadow: 'none',
   },
   menu: {
-    height: "2px",
-    width: "30px",
-    backgroundColor: "#34495E"
-  }
+    height: '2px',
+    width: '30px',
+    backgroundColor: '#34495E',
+  },
 }));
 
-const Appbar = props => {
+const Appbar = (props) => {
   const appbar = useRef(null);
   const classes = useStyles();
   return (
@@ -31,9 +34,9 @@ const Appbar = props => {
           alignItems="center"
           justifyContent="space-around"
           style={{
-            transition: "all easing 200ms",
-            height: "70px",
-            width: "90%"
+            transition: 'all easing 200ms',
+            height: '70px',
+            width: '90%',
           }}
         >
           <Grid item xs={6}>
@@ -51,9 +54,9 @@ const Appbar = props => {
               height="20px"
               justifyContent="space-between"
             >
-              <span className={classes.menu}></span>
-              <span className={classes.menu}></span>
-              <span className={classes.menu}></span>
+              <span className={classes.menu} />
+              <span className={classes.menu} />
+              <span className={classes.menu} />
             </Box>
           </Grid>
         </Grid>
@@ -64,7 +67,7 @@ const Appbar = props => {
 
 Appbar.propTypes = {
   color: PropTypes.string.isRequired,
-  position: PropTypes.string.isRequired
+  position: PropTypes.string.isRequired,
 };
 
 export default Appbar;
