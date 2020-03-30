@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { login } from "../utils/auth/auth";
 import { Box, Button, Switch, makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import InputField from "./inputField";
@@ -23,6 +22,8 @@ const FormSignIn = ({ handleUser, error }) => {
     setIsRemember(!isRemember);
   };
 
+  console.log(error)
+
   return (
     <>
       <h1 className="form-title" style={{ margin: "48px 0 16px 0" }}>
@@ -30,14 +31,16 @@ const FormSignIn = ({ handleUser, error }) => {
       </h1>
       <InputField
         handleState={setUsername}
-        error={error}
+        error={!!error.username}
+        helperText={error.username}
         value={username}
         label="Brugernavn"
         type="text"
       />
       <InputField
         handleState={setPassword}
-        error={error}
+        error={!!error.password}
+        helperText={error.password}
         value={password}
         label="Password"
         type="password"

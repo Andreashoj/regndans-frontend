@@ -3,6 +3,7 @@ import { TextField } from "@material-ui/core";
 
 const InputField = props => {
   const { error, handleState } = props;
+
   return (
     <TextField
       label={props.label}
@@ -11,9 +12,9 @@ const InputField = props => {
       id="outlined-basic"
       margin={"dense"}
       onChange={e => handleState(e.target.value)}
-      error={error.isError}
-      helperText={error.errorText}
-      color="secondary"
+      error={props.error}
+      helperText={props.helperText}
+      color="primary"
       style={{ margin: "16px 0" }}
     />
   );
