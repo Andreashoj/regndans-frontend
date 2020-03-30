@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { login } from "../utils/auth/auth";
 import { Box, Button, Switch, makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { login } from "../utils/auth/auth";
 import InputField from "./inputField";
 
 const useStyles = makeStyles({

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useTransition, animated } from "react-spring";
+import { withRouter } from "react-router-dom";
+import { Box, FormControl } from "@material-ui/core";
 import { login } from "../utils/auth/auth";
-import { Box, FormControl, Fade } from "@material-ui/core";
 import logo from "../../assets/logo-title.svg";
 import FormSignIn from "./formSignIn";
 import FormSignUp from "./formSignUp";
-import { withRouter } from "react-router-dom";
-import { useTransition, animated } from "react-spring";
 
 const handleUrl = url => {
   return url.split("/").splice(-1, 1)[0];
@@ -21,7 +21,7 @@ const Form = props => {
     password: ""
   });
   const [loginPage, setLoginPage] = useState(true);
-  
+
   const transitions = useTransition(loginPage, null, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
@@ -35,7 +35,7 @@ const Form = props => {
     setUrl(() => handleUrl(props.location.pathname));
     if (url === "formsignup") {
       setLoginPage(false);
-    }else{
+    } else {
       setLoginPage(true);
     }
   }, [props.history.location]);
@@ -74,20 +74,22 @@ const Form = props => {
         onSubmit={e => handleSubmit(e)}
         style={{ width: "60%", maxWidth: "600px" }}
       >
-        <FormControl fullWidth={true} style={{ alignItems: "flex-start" }}>
+        <FormControl fullWidth style={{ alignItems: "flex-start" }}>
           <Box display="flex" width="100%" justifyContent="center">
             <img src={logo} alt="Regndans logo" />
           </Box>
-          {transitions.map(({item, props, key}) =>
-             loginPage ? item && (
-              <animated.div  style={props}>
-                <FormSignIn handleUser={handleUser} error={error} />
-              </animated.div>
-            ) : !item && (
-              <animated.div style={props}>
-                <FormSignUp error={error} />
-              </animated.div>
-            )
+          {transitions.map(({ item, props, key }) =>
+            loginPage
+              ? item && (
+                  <animated.div style={props}>
+                    <FormSignIn handleUser={handleUser} error={error} />
+                  </animated.div>
+                )
+              : !item && (
+                  <animated.div style={props}>
+                    <FormSignUp error={error} />
+                  </animated.div>
+                )
           )}
         </FormControl>
       </form>
